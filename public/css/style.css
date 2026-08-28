@@ -1,0 +1,187 @@
+:root {
+    --primary-color: #2C3E50;
+    --secondary-color: #E67E22;
+    --light-bg: #F8F9FA;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}
+
+.bg-primary-custom {
+    background-color: var(--primary-color) !important;
+}
+
+.btn-primary-custom {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-primary-custom:hover {
+    background-color: #1a252f;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.btn-secondary-custom {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary-custom:hover {
+    background-color: #d35400;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Background Carousel Styles */
+.hero-carousel-container {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+#heroCarousel {
+    height: 100%;
+    width: 100%;
+}
+
+.carousel-inner, .carousel-item {
+    height: 100%;
+}
+
+.carousel-item {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+}
+
+/* Animations */
+.animate__animated {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+.animate__fadeInUp {
+    animation-name: fadeInUp;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 40px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.animate__delay-1s { animation-delay: 0.5s; }
+.animate__delay-2s { animation-delay: 1s; }
+
+/* Catalog Page Styles */
+.product-card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    height: 100%;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+}
+
+.product-card img {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    height: 250px;
+    object-fit: contain;
+    padding: 20px;
+    background: #fff;
+}
+
+.badge-featured {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: var(--secondary-color);
+}
+
+.price-tag {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.installment-price {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .hero-overlay h1 {
+        font-size: 2.5rem;
+    }
+    
+    .btn-lg {
+        padding: 12px 25px;
+        font-size: 1rem;
+    }
+
+    .form-control, .form-select, .btn {
+        min-height: 44px;
+    }
+}
+
+@media (max-width: 320px) {
+    .hero-overlay h1 {
+        font-size: 2rem;
+    }
+}
+
+.loading-spinner {
+    width: 3rem;
+    height: 3rem;
+}
+
+/* Admin Styles */
+.admin-sidebar {
+    min-height: 100vh;
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.admin-sidebar .nav-link {
+    color: rgba(255,255,255,0.8);
+    padding: 15px 20px;
+    border-radius: 0;
+}
+
+.admin-sidebar .nav-link:hover, 
+.admin-sidebar .nav-link.active {
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+}
+
+.stats-card {
+    border-left: 5px solid var(--secondary-color);
+}

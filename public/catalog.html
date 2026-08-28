@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone Catalog - Mobile Store</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary-custom sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">MOBILE STORE</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="catalog.html">Phones</a></li>
+                    <li class="nav-item"><a class="nav-link" href="refund.html">Refund Request</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-secondary-custom ms-lg-3" href="admin.html">Admin Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Product Catalog Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="fw-bold m-0">Mobile Catalog</h2>
+                <div class="text-muted" id="productCount">Loading products...</div>
+            </div>
+            
+            <!-- Filters -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label class="form-label small fw-bold">Search</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-white border-end-0"><i class="fas fa-search text-muted"></i></span>
+                                <input type="text" id="searchBar" class="form-control border-start-0" placeholder="Model, brand...">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label small fw-bold">Brand</label>
+                            <select id="brandFilter" class="form-select">
+                                <option value="">All Brands</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label small fw-bold">Price Range</label>
+                            <select id="priceFilter" class="form-select">
+                                <option value="">Any Price</option>
+                                <option value="0-50000">Under Rs. 50,000</option>
+                                <option value="50000-150000">Rs. 50,000 - Rs. 150,000</option>
+                                <option value="150000+">Above Rs. 150,000</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="productGrid" class="row g-4">
+                <!-- Products loaded here -->
+                <div class="col-12 text-center py-5">
+                    <div class="spinner-border text-primary" role="status"></div>
+                    <p class="mt-2 text-muted">Fetching latest mobiles...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Modal -->
+    <div class="modal fade" id="bookingModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header bg-primary-custom text-white">
+                    <h5 class="modal-title fw-bold">Complete Your Booking</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div id="bookingProductSummary" class="mb-4 p-3 bg-light rounded d-flex align-items-center">
+                        <!-- Product summary will be injected here -->
+                    </div>
+                    <form id="bookingForm">
+                        <input type="hidden" id="selectedProductId">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Full Name</label>
+                                <input type="text" id="custName" class="form-control" placeholder="John Doe" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Phone Number</label>
+                                <input type="tel" id="custPhone" class="form-control" placeholder="08012345678" required>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold">Email Address</label>
+                                <input type="email" id="custEmail" class="form-control" placeholder="john@example.com" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Payment Plan</label>
+                                <select id="paymentPlan" class="form-select" required onchange="updateInstallmentUI()">
+                                    <option value="cash">Full Cash Payment</option>
+                                    <option value="3">3 Months Installment</option>
+                                    <option value="6">6 Months Installment</option>
+                                    <option value="12">12 Months Installment</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Down Payment (Rs.)</label>
+                                <input type="number" id="downPayment" class="form-control" placeholder="Minimum 20%" required>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold">Delivery Address</label>
+                                <textarea id="deliveryAddress" class="form-control" rows="2" placeholder="Full street address, city, state" required></textarea>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold">Upload ID Card for Verification</label>
+                                <input type="file" id="idCardUpload" class="form-control" accept="image/*" required>
+                                <small class="text-muted">Drivers License, International Passport, or National ID</small>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 p-3 border rounded border-info bg-info bg-opacity-10 d-none" id="installmentSummary">
+                            <!-- Installment math here -->
+                        </div>
+
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-primary-custom w-100 py-3 fw-bold shadow-sm">
+                                <i class="fas fa-check-circle me-2"></i>Confirm and Book Mobile
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container text-center">
+            <p>&copy; 2023 Mobile Store. All rights reserved.</p>
+            <div class="mb-3">
+                <a href="#" class="text-white me-3"><i class="fab fa-facebook fa-2x"></i></a>
+                <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-2x"></i></a>
+                <a href="https://wa.me/yournumber" class="text-success"><i class="fab fa-whatsapp fa-2x"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Firebase Scripts (Compatibility Version) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-analytics-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

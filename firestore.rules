@@ -1,0 +1,28 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper to check if user is admin
+    function isAdmin() {
+      return request.auth != null;
+    }
+
+    match /Products/{productId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /Orders/{orderId} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
+    }
+
+    match /Refunds/{refundId} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
+    }
+    
+    match /Users/{userId} {
+      allow read, write: if isAdmin();
+    }
+  }
+}

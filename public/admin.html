@@ -3,83 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard v2.0</title>
+    <title>Admin Dashboard v8.0</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Navy Blue background to confirm the update */
+        #loginSection { 
+            background-color: #001f3f !important; 
+            min-height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+        }
+        .login-card { width: 400px; padding: 30px; border-radius: 15px; background: white; }
+        .version-label { position: fixed; top: 10px; left: 10px; color: yellow; font-weight: bold; z-index: 9999; }
+    </style>
 </head>
 <body class="bg-light">
+    <div class="version-label">DEBUG VERSION 8.0</div>
 
-    <!-- Login Container -->
-    <div id="loginSection" class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-4">
-                <div class="card shadow border-0">
-                    <div class="card-body p-4 text-center">
-                        <div class="mb-4">
-                            <i class="fas fa-user-shield fa-3x text-primary-custom"></i>
-                        </div>
-                        <h3 class="fw-bold mb-0">Admin Login</h3>
-                        <p class="text-muted small mb-4">Dashboard v2.0</p>
-                        
-                        <!-- Using div instead of form to 100% guarantee no browser submission -->
-                        <div id="loginFields">
-                            <div class="mb-3 text-start">
-                                <label class="form-label">Email Address</label>
-                                <input type="email" id="loginEmail" class="form-control" placeholder="admin@example.com">
-                            </div>
-                            <div class="mb-4 text-start">
-                                <label class="form-label">Password</label>
-                                <input type="password" id="loginPassword" class="form-control" placeholder="••••••••">
-                            </div>
-                            <button type="button" id="btnLogin" class="btn btn-primary-custom w-100 py-2">Login</button>
-                        </div>
-                    </div>
+    <!-- Login UI (Pure Divs, no Forms) -->
+    <div id="loginSection">
+        <div class="login-card shadow-lg text-center">
+            <i class="fas fa-lock fa-3x text-primary mb-3"></i>
+            <h3 class="fw-bold">ADMIN ACCESS</h3>
+            <p class="text-muted small">Please verify your identity</p>
+            <div class="text-start mt-4">
+                <div class="mb-3">
+                    <label class="form-label">Admin Email</label>
+                    <input type="email" id="loginEmail" class="form-control" placeholder="admin@example.com">
                 </div>
+                <div class="mb-4">
+                    <label class="form-label">Secure Password</label>
+                    <input type="password" id="loginPassword" class="form-control" placeholder="••••••••">
+                </div>
+                <button type="button" id="btnLogin" class="btn btn-primary w-100 py-2 fw-bold">AUTHENTICATE</button>
             </div>
         </div>
     </div>
 
-    <!-- Dashboard Container -->
+    <!-- Dashboard UI -->
     <div id="adminDashboard" class="d-none">
         <div class="container-fluid">
             <div class="row">
-                <!-- Sidebar -->
-                <nav class="col-md-2 d-md-block admin-sidebar collapse">
-                    <div class="position-sticky pt-3">
-                        <div class="px-3 mb-4">
-                            <h5 class="fw-bold m-0">MOBILE STORE</h5>
-                            <small class="text-white-50">Admin Panel v2.0</small>
-                        </div>
-                        <ul class="nav flex-column">
-                            <li class="nav-item"><a class="nav-link active" href="#" onclick="showSection('overview', event)"><i class="fas fa-chart-pie me-2"></i> Overview</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('products', event)"><i class="fas fa-mobile-alt me-2"></i> Products</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('orders', event)"><i class="fas fa-shopping-cart me-2"></i> Orders</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('refunds', event)"><i class="fas fa-undo-alt me-2"></i> Refunds</a></li>
-                            <li class="nav-item mt-4"><hr class="bg-white"><a class="nav-link text-danger" href="#" onclick="logout()"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
-                        </ul>
-                    </div>
+                <nav class="col-md-2 bg-dark text-white min-vh-100 p-4">
+                    <h5 class="fw-bold mb-4">MANAGEMENT</h5>
+                    <button class="btn btn-link text-white text-decoration-none w-100 text-start mb-2" onclick="showSection('overview')"><i class="fas fa-home me-2"></i>Overview</button>
+                    <button class="btn btn-link text-white text-decoration-none w-100 text-start mb-2" onclick="showSection('products')"><i class="fas fa-mobile-alt me-2"></i>Inventory</button>
+                    <button class="btn btn-outline-danger w-100 mt-5" onclick="logout()">Logout</button>
                 </nav>
-
-                <main class="col-md-10 ms-sm-auto px-md-4 py-4">
+                <main class="col-md-10 p-5">
                     <section id="overviewSection" class="dashboard-section">
-                        <h2 class="h4 mb-4 fw-bold">Dashboard Overview</h2>
-                        <div class="row g-4 mb-4">
-                            <div class="col-md-3"><div class="card stats-card border-0 shadow-sm h-100 p-3"><div class="text-muted small fw-bold">TOTAL ORDERS</div><div class="h2 fw-bold" id="statTotalOrders">0</div></div></div>
-                            <div class="col-md-3"><div class="card stats-card border-0 shadow-sm h-100 p-3" style="border-left-color: #f1c40f !important;"><div class="text-muted small fw-bold">PENDING ORDERS</div><div class="h2 fw-bold text-warning" id="statPendingOrders">0</div></div></div>
-                            <div class="col-md-3"><div class="card stats-card border-0 shadow-sm h-100 p-3" style="border-left-color: #2ecc71 !important;"><div class="text-muted small fw-bold">REVENUE</div><div class="h2 fw-bold text-success" id="statRevenue">Rs. 0</div></div></div>
-                            <div class="col-md-3"><div class="card stats-card border-0 shadow-sm h-100 p-3" style="border-left-color: #e74c3c !important;"><div class="text-muted small fw-bold">PENDING REFUNDS</div><div class="h2 fw-bold text-danger" id="statPendingRefunds">0</div></div></div>
+                        <h2 class="fw-bold mb-4">Dashboard Overview</h2>
+                        <div class="row g-4">
+                            <div class="col-md-4">
+                                <div class="card p-4 border-0 shadow-sm">
+                                    <div class="text-muted small">TOTAL TRANSACTIONS</div>
+                                    <div class="h1 fw-bold" id="statTotalOrders">0</div>
+                                </div>
+                            </div>
                         </div>
                     </section>
-
                     <section id="productsSection" class="dashboard-section d-none">
                         <div class="d-flex justify-content-between align-items-center mb-4">
-                            <h2 class="h4 fw-bold">Product Management</h2>
-                            <button class="btn btn-primary-custom px-4" onclick="openAddProductModal()"><i class="fas fa-plus me-2"></i>Add New Product</button>
+                            <h2 class="fw-bold">Inventory Management</h2>
+                            <button type="button" class="btn btn-success px-4" onclick="openAddProductModal()">+ NEW PRODUCT</button>
                         </div>
                         <div class="table-responsive bg-white rounded shadow-sm">
                             <table class="table table-hover align-middle mb-0">
-                                <thead class="table-light"><tr><th>Image</th><th>Name</th><th>Brand</th><th>Price</th><th>Stock</th><th class="text-end">Action</th></tr></thead>
+                                <thead class="table-light"><tr><th>Product</th><th>Price</th><th>Stock</th><th class="text-end">Action</th></tr></thead>
                                 <tbody id="productTableBody"></tbody>
                             </table>
                         </div>
@@ -89,33 +82,31 @@
         </div>
     </div>
 
-    <!-- Product Modal -->
+    <!-- Product Entry Modal -->
     <div class="modal fade" id="productModal" tabindex="-1">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title fw-bold">Product Details</h5>
+                <div class="modal-header border-0">
+                    <h5 class="fw-bold">Inventory Details</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body">
-                    <div id="productFields">
-                        <input type="hidden" id="editProductId">
-                        <div class="row g-3">
-                            <div class="col-md-4"><label class="form-label">Product Name</label><input type="text" id="pName" class="form-control"></div>
-                            <div class="col-md-4"><label class="form-label">Brand</label><input type="text" id="pBrand" class="form-control"></div>
-                            <div class="col-md-4"><label class="form-label">Model</label><input type="text" id="pModel" class="form-control"></div>
-                            <div class="col-md-4"><label class="form-label">Cash Price</label><input type="number" id="pCashPrice" class="form-control"></div>
-                            <div class="col-md-4"><label class="form-label">Inst. Price</label><input type="number" id="pInstPrice" class="form-control"></div>
-                            <div class="col-md-4"><label class="form-label">Stock</label><input type="number" id="pStock" class="form-control"></div>
-                            <div class="col-12"><label class="form-label">Images</label><input type="file" id="pImages" class="form-control" multiple></div>
-                        </div>
-                        <button type="button" id="btnSaveProduct" class="btn btn-primary-custom w-100 mt-4 py-3 fw-bold">Save Product</button>
+                <div class="modal-body p-4">
+                    <input type="hidden" id="editProductId">
+                    <div class="row g-3">
+                        <div class="col-md-6"><label class="form-label">Device Name</label><input type="text" id="pName" class="form-control"></div>
+                        <div class="col-md-6"><label class="form-label">Brand</label><input type="text" id="pBrand" class="form-control"></div>
+                        <div class="col-md-4"><label class="form-label">Cash Price (Rs.)</label><input type="number" id="pCashPrice" class="form-control"></div>
+                        <div class="col-md-4"><label class="form-label">Monthly Inst. (Rs.)</label><input type="number" id="pInstPrice" class="form-control"></div>
+                        <div class="col-md-4"><label class="form-label">Stock Count</label><input type="number" id="pStock" class="form-control"></div>
+                        <div class="col-12"><label class="form-label">Images</label><input type="file" id="pImages" class="form-control"></div>
                     </div>
+                    <button type="button" id="btnSaveProduct" class="btn btn-primary w-100 mt-4 py-3 fw-bold">COMMIT TO DATABASE</button>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Core Dependencies -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>

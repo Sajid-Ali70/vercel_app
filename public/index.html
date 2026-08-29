@@ -3,78 +3,282 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mobile Store - Buy Your Dream Phone</title>
+    <title>Alfa Mobiles - Apps on Google Play</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary-custom sticky-top">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="index.html">MOBILE STORE</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="catalog.html">Phones</a></li>
-                    <li class="nav-item"><a class="nav-link" href="refund.html">Refund Request</a></li>
-                    <li class="nav-item"><a class="nav-link btn btn-secondary-custom ms-lg-3" href="admin.html">Admin Login</a></li>
-                </ul>
+    <!-- Google Play Header -->
+    <nav class="navbar navbar-play">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-arrow-left nav-icon me-4 d-md-none"></i>
+                <a href="index.html">
+                    <img src="https://www.gstatic.com/android/market_images/web/play_prism_hlock_2x.png" alt="Google Play" class="play-logo">
+                </a>
+            </div>
+            <div class="d-flex align-items-center">
+                <i class="fas fa-search nav-icon"></i>
+                <i class="far fa-question-circle nav-icon"></i>
+                <div class="profile-circle">U</div>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section with Background Carousel -->
-    <section id="hero" class="hero-carousel-container">
-        <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
-            <div class="carousel-inner">
-                <div class="carousel-item active" style="background-image: url('./img/photo-1511707171634-5f897ff02aa9.png')"></div>
-                <div class="carousel-item" style="background-image: url('./img/photo-1511707171634-5f897ff02aa9.png')"></div>
-                <div class="carousel-item" style="background-image: url('./img/photo-1592890288564-76628a30a657.png')"></div>
+    <main class="main-content">
+        <!-- App Header Section -->
+        <div class="app-header">
+            <img src="../image/01_app_icon.png" alt="Alfa Mobiles Icon" class="app-icon" onerror="this.src='https://placehold.co/96x96?text=Alfa+Mobiles'">
+            <div class="app-title-container">
+                <h1>Alfa Mobiles</h1>
+                <div class="dev-name">Alfa Mobiles Mart Karachi</div>
+                <div class="app-meta">Contains ads · In-app purchases</div>
             </div>
-            <div class="hero-overlay d-flex align-items-center">
-                <div class="container text-center">
-                    <h1 class="display-3 fw-bold text-white mb-4 animate__animated animate__fadeInUp">Get Your New Mobile Today</h1>
-                    <p class="lead text-white mb-5 animate__animated animate__fadeInUp animate__delay-1s">Flexible installment plans for everyone. Pay cash or choose 3, 6, or 12 months plans.</p>
-                    <div class="d-grid gap-3 d-sm-flex justify-content-sm-center animate__animated animate__fadeInUp animate__delay-2s">
-                        <a href="catalog.html" class="btn btn-secondary-custom btn-lg px-5 py-3 fw-bold">Book Your Mobile</a>
-                        <a href="refund.html" class="btn btn-outline-light btn-lg px-5 py-3 fw-bold">Refund Your Payment</a>
-                    </div>
+        </div>
+
+        <!-- Stats Row -->
+        <div class="stats-row">
+            <div class="stat-item">
+                <span class="stat-value">4.3 <i class="fas fa-star small"></i></span>
+                <span class="stat-label">1.9K reviews</span>
+            </div>
+            <div class="stat-item border-start border-end">
+                <span class="stat-value">3K+</span>
+                <span class="stat-label">Downloads</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value"><img src="https://www.gstatic.com/android/market_images/web/ratings/r_3plus.png" height="16" alt="Rated 3+"></span>
+                <span class="stat-label">Rated for 3+ <i class="fas fa-info-circle small"></i></span>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <button class="btn btn-install">Install</button>
+        <div class="text-center mb-4">
+            <a href="#" class="dev-name text-decoration-none">
+                <i class="far fa-plus-square me-1"></i> Add to wishlist
+            </a>
+        </div>
+
+        <div class="section-content mb-4 text-center">
+            <i class="fas fa-tablet-alt me-2" style="color: var(--play-green)"></i>
+            This app is compatible with all of your devices.
+        </div>
+
+        <!-- Screenshots -->
+        <div class="screenshots-container">
+            <img src="../image/02_shop_front.png" class="screenshot" alt="Screenshot 1">
+            <img src="../image/03_shop_interior.png" class="screenshot" alt="Screenshot 2">
+            <img src="../image/04_shop_counter.png" class="screenshot" alt="Screenshot 3">
+            <img src="../image/05_book_your_order_screen.png" class="screenshot" alt="Screenshot 4">
+            <img src="../image/06_select_mobile_screen.png" class="screenshot" alt="Screenshot 5">
+        </div>
+
+        <!-- Category Tag -->
+        <div class="mb-4">
+            <span class="badge rounded-pill bg-light text-dark border px-3 py-2 fw-normal">Shopping</span>
+        </div>
+
+        <!-- About App -->
+        <div class="section-header">
+            <h2>About this app</h2>
+            <i class="fas fa-arrow-right section-arrow"></i>
+        </div>
+        <div class="section-content">
+            Alfa Mobiles is Pakistan's trusted online mobile shopping app. Buy 100% original smartphones on easy monthly installments. No advance payment, 0% markup, no hidden charges. Enjoy a safe, simple & reliable shopping experience with Alfa Mobiles.
+        </div>
+        
+        <div class="section-content">
+            <i class="fas fa-check-circle me-2" style="color: var(--play-green)"></i> 100% Original Box Pack Mobiles<br>
+            <i class="fas fa-check-circle me-2" style="color: var(--play-green)"></i> Easy Monthly Installments (12 to 60 Months)<br>
+            <i class="fas fa-check-circle me-2" style="color: var(--play-green)"></i> No Advance Payment<br>
+            <i class="fas fa-check-circle me-2" style="color: var(--play-green)"></i> 0% Markup - No Hidden Charges<br>
+            <i class="fas fa-check-circle me-2" style="color: var(--play-green)"></i> Official Warranty<br>
+            <i class="fas fa-check-circle me-2" style="color: var(--play-green)"></i> Nationwide Delivery (All Over Pakistan)<br>
+            <i class="fas fa-check-circle me-2" style="color: var(--play-green)"></i> Dedicated Customer Support
+        </div>
+
+        <div class="d-flex gap-2 mb-4">
+            <span class="badge bg-light text-dark border p-2 fw-normal rounded-pill">Updated on Aug 14, 2026</span>
+            <span class="badge bg-light text-dark border p-2 fw-normal rounded-pill">#Mobile Shopping</span>
+        </div>
+
+        <!-- What's New -->
+        <div class="section-header">
+            <h2>What's new</h2>
+            <i class="fas fa-arrow-right section-arrow"></i>
+        </div>
+        <div class="section-content">
+            • New mobile booking system with easy installment plan<br>
+            • Improved app performance and faster browsing<br>
+            • Bug fixes and overall user experience improvements<br>
+            • Enhanced security for safe shopping
+        </div>
+
+        <!-- Data Safety -->
+        <div class="section-header">
+            <h2>Data safety</h2>
+            <i class="fas fa-arrow-right section-arrow"></i>
+        </div>
+        <div class="section-content">
+            At Alfa Mobiles, your privacy and data security is our top priority. We do not share your personal information with any third party.
+        </div>
+        <div class="data-safety-box">
+            <div class="safety-item">
+                <i class="fas fa-user-shield"></i>
+                <div>
+                    <span class="safety-item-title">No data shared with third parties</span>
+                    <span class="safety-item-desc">Alfa Mobiles does not share your personal data with any other companies or organizations.</span>
+                </div>
+            </div>
+            <div class="safety-item">
+                <i class="fas fa-lock"></i>
+                <div>
+                    <span class="safety-item-title">Data is encrypted in transit</span>
+                    <span class="safety-item-desc">Your data is transferred over a secure, encrypted HTTPS connection.</span>
+                </div>
+            </div>
+            <div class="safety-item">
+                <i class="fas fa-trash-alt"></i>
+                <div>
+                    <span class="safety-item-title">You can request that data be deleted</span>
+                    <span class="safety-item-desc">You can contact us anytime to request deletion of your personal data.</span>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/yournumber" class="whatsapp-float" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
+        <!-- Ratings and Reviews -->
+        <div class="section-header">
+            <h2>Ratings and reviews</h2>
+            <i class="fas fa-arrow-right section-arrow"></i>
+        </div>
+        <div class="ratings-container">
+            <div class="rating-big">4.3</div>
+            <div class="rating-bars">
+                <div class="rating-bar-row">
+                    <span class="bar-num">5</span>
+                    <div class="bar-bg"><div class="bar-fill" style="width: 75%"></div></div>
+                </div>
+                <div class="rating-bar-row">
+                    <span class="bar-num">4</span>
+                    <div class="bar-bg"><div class="bar-fill" style="width: 15%"></div></div>
+                </div>
+                <div class="rating-bar-row">
+                    <span class="bar-num">3</span>
+                    <div class="bar-bg"><div class="bar-fill" style="width: 5%"></div></div>
+                </div>
+                <div class="rating-bar-row">
+                    <span class="bar-num">2</span>
+                    <div class="bar-bg"><div class="bar-fill" style="width: 2%"></div></div>
+                </div>
+                <div class="rating-bar-row">
+                    <span class="bar-num">1</span>
+                    <div class="bar-bg"><div class="bar-fill" style="width: 3%"></div></div>
+                </div>
+                <div class="text-end small text-muted mt-1">1.9K reviews</div>
+            </div>
+        </div>
+
+        <!-- Review 1 -->
+        <div class="review-item">
+            <div class="reviewer-header">
+                <div class="reviewer-avatar">A</div>
+                <span class="reviewer-name">Abdul Rehman</span>
+                <i class="fas fa-ellipsis-v ms-auto text-secondary small"></i>
+            </div>
+            <div class="review-stars">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                <span class="review-date">August 12, 2026</span>
+            </div>
+            <div class="section-content mb-2">
+                Alfa Mobiles se mobile book karna bohat asaan hai. Easy installment plan aur without advance payment best experience diya. Highly recommended!
+            </div>
+            <div class="small text-muted mb-3 d-flex align-items-center">
+                Was this review helpful? 
+                <button class="btn btn-outline-secondary btn-sm rounded-pill px-3 py-0 ms-2" style="font-size: 11px;">Yes</button> 
+                <button class="btn btn-outline-secondary btn-sm rounded-pill px-3 py-0 ms-1" style="font-size: 11px;">No</button>
+            </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="review-item">
+            <div class="reviewer-header">
+                <div class="reviewer-avatar">M</div>
+                <span class="reviewer-name">Muhammad Usman</span>
+                <i class="fas fa-ellipsis-v ms-auto text-secondary small"></i>
+            </div>
+            <div class="review-stars">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                <span class="review-date">August 8, 2026</span>
+            </div>
+            <div class="section-content mb-2">
+                Original phones, official warranty aur 0% markup ke saath monthly installments. Alfa Mobiles trust aur service dono mein best hai.
+            </div>
+            <div class="small text-muted mb-3 d-flex align-items-center">
+                Was this review helpful? 
+                <button class="btn btn-outline-secondary btn-sm rounded-pill px-3 py-0 ms-2" style="font-size: 11px;">Yes</button> 
+                <button class="btn btn-outline-secondary btn-sm rounded-pill px-3 py-0 ms-1" style="font-size: 11px;">No</button>
+            </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="review-item">
+            <div class="reviewer-header">
+                <div class="reviewer-avatar">S</div>
+                <span class="reviewer-name">Sana Khan</span>
+                <i class="fas fa-ellipsis-v ms-auto text-secondary small"></i>
+            </div>
+            <div class="review-stars">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                <span class="review-date">August 1, 2026</span>
+            </div>
+            <div class="section-content mb-2">
+                Maine iPhone 15 Pro booking ki. Delivery time par mili aur condition excellent thi. Alfa Mobiles ki customer support bohat achi hai.
+            </div>
+            <div class="small text-muted mb-3 d-flex align-items-center">
+                Was this review helpful? 
+                <button class="btn btn-outline-secondary btn-sm rounded-pill px-3 py-0 ms-2" style="font-size: 11px;">Yes</button> 
+                <button class="btn btn-outline-secondary btn-sm rounded-pill px-3 py-0 ms-1" style="font-size: 11px;">No</button>
+            </div>
+        </div>
+
+        <!-- Developer Contact -->
+        <div class="section-header mt-5">
+            <h2>Developer contact</h2>
+            <i class="fas fa-chevron-down section-arrow"></i>
+        </div>
+        <div class="section-content">
+            <div class="mb-2"><i class="fas fa-globe me-2"></i> Website: https://alfamobiles.pk</div>
+            <div class="mb-2"><i class="fas fa-envelope me-2"></i> Email: alfamobilesmart.online@gmail.com</div>
+            <div class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> Address: Hafees Centre, Bangalore Town, Block A, Karachi, Pakistan 37350</div>
+        </div>
+    </main>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white py-4">
-        <div class="container text-center">
-            <p>&copy; 2023 Mobile Store. All rights reserved.</p>
-            <div class="mb-3">
-                <a href="#" class="text-white me-3"><i class="fab fa-facebook fa-2x"></i></a>
-                <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-2x"></i></a>
+    <footer class="footer-play text-center mb-5 pb-5">
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">Google Play Terms of Service</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">About Google Play</a>
+                <a href="#">Developers</a>
             </div>
+            <p>© 2026 Google LLC. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- Firebase Scripts (Compatibility Version) -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-analytics-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <!-- Bottom Nav for Mobile -->
+    <div class="d-flex d-md-none justify-content-around bg-white border-top py-2 fixed-bottom" style="font-size: 10px; color: var(--text-secondary); z-index: 1000;">
+        <div class="text-center"><i class="fas fa-gamepad d-block fs-6 mb-1"></i>Games</div>
+        <div class="text-center" style="color: var(--play-green)"><i class="fas fa-th-large d-block fs-6 mb-1"></i>Apps</div>
+        <div class="text-center"><i class="fas fa-tags d-block fs-6 mb-1"></i>Offers</div>
+        <div class="text-center"><i class="fas fa-film d-block fs-6 mb-1"></i>Movies</div>
+        <div class="text-center"><i class="fas fa-book d-block fs-6 mb-1"></i>Books</div>
+    </div>
 
-    <!-- Bootstrap & Custom JS -->
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/firebase-config.js"></script>
-    <script src="js/app.js"></script>
 </body>
 </html>

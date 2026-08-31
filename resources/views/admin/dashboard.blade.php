@@ -423,7 +423,41 @@
             white-space: normal;
         }
 
+        .apk-upload-box {
+            border: 2px dashed var(--border-color);
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            background: rgba(255, 255, 255, 0.01);
+        }
+        .apk-upload-box:hover {
+            background: rgba(255, 255, 255, 0.03);
+            border-color: var(--accent-blue);
+        }
+        .apk-upload-icon {
+            font-size: 3rem;
+            color: var(--accent-blue);
+            margin-bottom: 20px;
+        }
+
         .d-none { display: none !important; }
+
+        .progress {
+            background-color: #0d1117;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            height: 20px;
+        }
+        .progress-bar {
+            background: var(--accent-blue);
+            font-size: 0.85rem;
+            line-height: 20px;
+            color: white;
+            text-align: center;
+            transition: width 0.3s;
+        }
 
         /* Responsive Styles */
         @media (max-width: 992px) {
@@ -775,6 +809,23 @@
                     <button class="btn-primary-custom" onclick="saveExternalApkUrl()">Update Link</button>
                 </div>
             </div>
+
+            <div class="admin-card">
+                <h5 class="section-title">Direct Upload APK File (10-15MB Support)</h5>
+                <p class="section-desc">Select an APK file to upload directly to the server. Percentage will show during upload.</p>
+                <div class="apk-upload-box" id="apkUploadContainer">
+                    <i class="fas fa-cloud-upload-alt apk-upload-icon"></i>
+                    <div id="uploadStatusText">Select .apk File</div>
+                    <input type="file" id="apk_file_upload" class="d-none" accept=".apk" onchange="handleFileSelect(this)">
+                    <div class="mt-3">
+                        <button type="button" class="btn btn-outline-primary" onclick="document.getElementById('apk_file_upload').click()">Select File</button>
+                        <button type="button" id="startUploadBtn" class="btn btn-primary-custom d-none" onclick="uploadApkFile()">Upload Now</button>
+                    </div>
+                </div>
+                <div class="progress mt-3 d-none" id="uploadProgressContainer">
+                    <div id="uploadProgressBar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%">0%</div>
+                </div>
+            </div>
         </section>
 
         <!-- Section: Security -->
@@ -927,6 +978,68 @@
                 alert("An error occurred. Please check console.");
                 console.error(error);
             }
+        }
+
+        function handleFileSelect(input) {
+            const file = input.files[0];
+            if (file) {
+                document.getElementById('uploadStatusText').innerText = "Selected: " + file.name;
+                document.getElementById('startUploadBtn').classList.remove('d-none');
+            }
+        }
+
+        function uploadApkFile() {
+            const input = document.getElementById('apk_file_upload');
+            if (!input.files[0]) return;
+
+            const statusText = document.getElementById('uploadStatusText');
+            const progressContainer = document.getElementById('uploadProgressContainer');
+            const progressBar = document.getElementById('uploadProgressBar');
+            const startBtn = document.getElementById('startUploadBtn');
+
+            statusText.innerText = "Uploading " + input.files[0].name + "...";
+            progressContainer.classList.remove('d-none');
+            startBtn.classList.add('d-none');
+            progressBar.style.width = '0%';
+            progressBar.innerText = '0%';
+
+            const fd = new FormData();
+            fd.append('apk_file', input.files[0]);
+
+            const xhr = new XMLHttpRequest();
+
+            xhr.upload.addEventListener('progress', (e) => {
+                if (e.lengthComputable) {
+                    const percent = Math.round((e.loaded / e.total) * 100);
+                    progressBar.style.width = percent + '%';
+                    progressBar.innerText = percent + '%';
+                    statusText.innerText = `Uploading... ${percent}%`;
+                }
+            });
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        try {
+                            const data = JSON.parse(xhr.responseText);
+                            alert(data.message || "APK uploaded successfully!");
+                            location.reload();
+                        } catch (e) {
+                            alert("APK uploaded successfully!");
+                            location.reload();
+                        }
+                    } else {
+                        statusText.innerText = "Upload failed.";
+                        alert("Failed to upload APK. Please ensure your server supports file uploads of this size.");
+                        progressContainer.classList.add('d-none');
+                        startBtn.classList.remove('d-none');
+                    }
+                }
+            };
+
+            xhr.open('POST', "{{ route('admin.apk.upload') }}", true);
+            xhr.setRequestHeader('X-CSRF-TOKEN', '{{ csrf_token() }}');
+            xhr.send(fd);
         }
 
         document.getElementById('passwordUpdateForm').onsubmit = async function(e) {

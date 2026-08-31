@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 <body>
+    @php
+        $appName = $settings->app_name ?? 'Alfa Mobiles';
+    @endphp
     <!-- Google Play Header -->
     <nav class="navbar navbar-play">
         <div class="container d-flex justify-content-between align-items-center flex-nowrap px-2">
@@ -35,8 +38,8 @@
         <div class="app-header">
             <img src="{{ $settings->app_icon ?? asset('asset/image/01_app_icon.png') }}" alt="App Icon" class="app-icon" onerror="this.src='https://placehold.co/96x96?text=App+Icon'">
             <div class="app-title-container">
-                <h1>{{ $settings->app_name ?? 'Alfa Mobiles' }}</h1>
-                <div class="dev-name">{{ $settings->developer ?? 'Alfa Mobiles Mart Karachi' }}</div>
+                <h1>{{ $appName }}</h1>
+                <div class="dev-name">{{ $settings->developer ?? ($appName . ' Mart Karachi') }}</div>
                 <div class="app-meta">{{ $settings->tags ?? 'Contains ads · In-app purchases' }}</div>
             </div>
         </div>
@@ -53,11 +56,9 @@
             </div>
             <div class="stat-item">
                 <span class="stat-value">
-                    @if(($settings->content_rating ?? '') == 'Teen')
-                        <span class="fw-bold">T</span>
-                    @else
-                        <img src="https://www.gstatic.com/android/market_images/web/ratings/r_3plus.png" height="16" alt="Rated 3+">
-                    @endif
+                    <div class="content-rating-badge mx-auto">
+                        @if(($settings->content_rating ?? '') == 'Teen') T @else 3+ @endif
+                    </div>
                 </span>
                 <span class="stat-label">{{ $settings->content_rating ?? 'Rated for 3+' }} <i class="fas fa-info-circle small"></i></span>
             </div>
@@ -110,7 +111,44 @@
             <i class="fas fa-arrow-right section-arrow"></i>
         </div>
         <div class="section-content">
-            {!! nl2br(e($settings->description ?? "Alfa Mobiles is Pakistan's trusted online mobile shopping app. Buy 100% original smartphones on easy monthly installments. No advance payment, 0% markup, no hidden charges. Enjoy a safe, simple & reliable shopping experience with Alfa Mobiles.")) !!}
+            @php
+                $defaultDesc = "$appName is Pakistan's trusted online mobile shopping app. Buy 100% original smartphones on easy monthly installments. No advance payment, 0% markup, no hidden charges. Enjoy a safe, simple & reliable shopping experience with $appName.";
+            @endphp
+            {!! nl2br(e($settings->description ?? $defaultDesc)) !!}
+        </div>
+
+        <!-- App info grid -->
+        <div class="section-header mt-4">
+            <h2>App info</h2>
+        </div>
+        <div class="app-info-grid">
+            <div class="info-item">
+                <div class="info-label">Version</div>
+                <div class="info-value">1.0.12</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Updated on</div>
+                <div class="info-value">{{ $settings->updated_date ?? 'Aug 14, 2026' }}</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Requires Android</div>
+                <div class="info-value">5.0 and up</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Downloads</div>
+                <div class="info-value">{{ $settings->downloads_count ?? '3K+' }} downloads</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Content rating</div>
+                <div class="info-value">
+                    {{ $settings->content_rating ?? 'Rated for 3+' }}
+                    <i class="fas fa-info-circle ms-1" style="font-size: 10px; color: var(--text-secondary);"></i>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Released on</div>
+                <div class="info-value">Oct 12, 2023</div>
+            </div>
         </div>
 
         <div class="d-flex gap-2 mb-4">
@@ -133,14 +171,14 @@
             <i class="fas fa-arrow-right section-arrow"></i>
         </div>
         <div class="section-content">
-            At Alfa Mobiles, your privacy and data security is our top priority. We do not share your personal information with any third party.
+            At {{ $appName }}, your privacy and data security is our top priority. We do not share your personal information with any third party.
         </div>
         <div class="data-safety-box">
             <div class="safety-item">
                 <i class="fas fa-user-shield"></i>
                 <div>
                     <span class="safety-item-title">No data shared with third parties</span>
-                    <span class="safety-item-desc">Alfa Mobiles does not share your personal data with any other companies or organizations.</span>
+                    <span class="safety-item-desc">{{ $appName }} does not share your personal data with any other companies or organizations.</span>
                 </div>
             </div>
             <div class="safety-item">
@@ -210,7 +248,7 @@
                 <span class="review-date">{{ $review->review_date }}</span>
             </div>
             <div class="section-content mb-2">
-                {{ $review->review_text }}
+                {{ str_replace('Alfa Mobiles', $appName, $review->review_text) }}
             </div>
             <div class="small text-muted mb-3 d-flex align-items-center">
                 Was this review helpful?
@@ -237,7 +275,7 @@
                 <a href="#">Refund policy</a>
             </div>
             <div class="mt-3">
-                &copy; {{ date('Y') }} {{ $settings->app_name ?? 'Alfa Mobiles' }}. All rights reserved.
+                &copy; {{ date('Y') }} {{ $appName }}. All rights reserved.
             </div>
         </div>
     </footer>

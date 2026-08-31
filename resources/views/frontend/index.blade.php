@@ -56,15 +56,18 @@
             </div>
             <div class="stat-item">
                 <span class="stat-value">
-                    <div class="content-rating-box">
-                        @if(($settings->content_rating ?? '') == 'Teen')
-                            T
-                        @else
-                            3+
-                        @endif
+                    <div class="content-rating-badge mx-auto">
+                        @php
+                            $ratingVal = $settings->content_rating ?? 'Rated for 3+';
+                            $badgeText = preg_replace('/[^0-9+]/', '', $ratingVal);
+                            if (empty($badgeText)) $badgeText = str_contains(strtolower($ratingVal), 'teen') ? 'T' : '3+';
+                        @endphp
+                        {{ $badgeText }}
                     </div>
                 </span>
-                <span class="stat-label">{{ $settings->content_rating ?? 'Rated for 3+' }} <i class="fas fa-info-circle small"></i></span>
+                <span class="stat-label">
+                    {{ $ratingVal }} <i class="fas fa-info-circle" style="font-size: 9px;"></i>
+                </span>
             </div>
         </div>
 
@@ -118,7 +121,41 @@
             @php
                 $defaultDesc = "$appName is Pakistan's trusted online mobile shopping app. Buy 100% original smartphones on easy monthly installments. No advance payment, 0% markup, no hidden charges. Enjoy a safe, simple & reliable shopping experience with $appName.";
             @endphp
-            {!! nl2br(e($settings->description ?? $defaultDesc)) !!}
+            {!! nl2br(e($settings->description ?: $defaultDesc)) !!}
+        </div>
+
+        <!-- App info grid -->
+        <div class="section-header mt-4">
+            <h2>App info</h2>
+        </div>
+        <div class="app-info-grid">
+            <div class="info-item">
+                <div class="info-label">Version</div>
+                <div class="info-value">1.0.12</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Updated on</div>
+                <div class="info-value">{{ $settings->updated_date ?? 'Aug 14, 2026' }}</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Requires Android</div>
+                <div class="info-value">5.0 and up</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Downloads</div>
+                <div class="info-value">{{ $settings->downloads_count ?? '3K+' }} downloads</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Content rating</div>
+                <div class="info-value">
+                    {{ $settings->content_rating ?? 'Rated for 3+' }}
+                    <i class="fas fa-info-circle ms-1" style="font-size: 10px; color: var(--text-secondary);"></i>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Released on</div>
+                <div class="info-value">Oct 12, 2023</div>
+            </div>
         </div>
 
         <div class="d-flex gap-2 mb-4">
@@ -218,7 +255,7 @@
                 <span class="review-date">{{ $review->review_date }}</span>
             </div>
             <div class="section-content mb-2">
-                {{ $review->review_text }}
+                {{ str_replace('Alfa Mobiles', $appName, $review->review_text) }}
             </div>
             <div class="small text-muted mb-3 d-flex align-items-center">
                 Was this review helpful?

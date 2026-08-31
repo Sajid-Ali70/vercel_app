@@ -114,26 +114,39 @@ body {
 .stat-value {
     font-weight: 500;
     font-size: 14px;
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    min-height: 24px;
 }
 
 .stat-label {
     font-size: 11px;
     color: var(--text-secondary);
+    margin-top: 2px;
 }
 
-.content-rating-box {
+.content-rating-badge {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid var(--text-primary);
-    border-radius: 2px;
-    padding: 1px 2px;
-    font-size: 9px;
+    border: 1px solid #3c4043;
+    border-radius: 1px;
+    padding: 0 2px;
+    font-size: 10px;
     font-weight: 700;
     line-height: 1;
     min-width: 14px;
     height: 14px;
+    color: #3c4043;
+}
+
+.info-icon-small {
+    font-size: 9px;
+    color: var(--text-secondary);
+    vertical-align: middle;
+    margin-left: 2px;
 }
 
 /* Install Button */
@@ -152,16 +165,6 @@ body {
 .btn-install:hover {
     background-color: #006e4e;
     color: white;
-}
-
-.play-store-app-link {
-    display: block;
-    text-align: center;
-    color: var(--play-green);
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 500;
-    margin-bottom: 24px;
 }
 
 /* Screenshots - Scrollable */
@@ -210,6 +213,30 @@ body {
     color: var(--text-secondary);
     line-height: 1.5;
     margin-bottom: 24px;
+}
+
+/* App Info Grid */
+.app-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 32px;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 2px;
+}
+
+.info-value {
+    font-size: 14px;
+    color: var(--text-primary);
 }
 
 /* Data Safety Box */
@@ -381,29 +408,6 @@ body {
         margin-left: 14px;
         font-size: 12px;
     }
-    .navbar-play .d-flex.align-items-center:first-child .nav-icon {
-        margin-left: 0;
-        margin-right: 12px !important;
-    }
-}
-
-@media (max-width: 360px) {
-    .play-logo {
-        height: 18px;
-    }
-    .nav-icon {
-        margin-left: 10px;
-        font-size: 16px;
-    }
-    .profile-circle {
-        margin-left: 10px;
-        width: 24px;
-        height: 24px;
-        font-size: 10px;
-    }
-    .navbar-play .d-flex.align-items-center:first-child .nav-icon {
-        margin-right: 8px !important;
-    }
 }
 
 @media (max-width: 480px) {
@@ -416,5 +420,9 @@ body {
     }
     .app-title-container h1 {
         font-size: 18px;
+    }
+    .app-info-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
     }
 }

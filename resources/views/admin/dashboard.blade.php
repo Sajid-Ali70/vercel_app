@@ -423,25 +423,6 @@
             white-space: normal;
         }
 
-        .apk-upload-box {
-            border: 2px dashed var(--border-color);
-            border-radius: 12px;
-            padding: 40px;
-            text-align: center;
-            cursor: pointer;
-            transition: 0.3s;
-            background: rgba(255, 255, 255, 0.01);
-        }
-        .apk-upload-box:hover {
-            background: rgba(255, 255, 255, 0.03);
-            border-color: var(--accent-blue);
-        }
-        .apk-upload-icon {
-            font-size: 3rem;
-            color: var(--accent-blue);
-            margin-bottom: 20px;
-        }
-
         .d-none { display: none !important; }
 
         /* Responsive Styles */
@@ -786,18 +767,12 @@
                     <input type="text" id="currentApkUrl" class="form-control" value="{{ $settings->apk_url ?? '' }}" readonly>
                     <button class="btn btn-primary" onclick="copyApkUrl()">Copy</button>
                 </div>
-                <h5 class="section-title">Update APK Link</h5>
+
+                <h5 class="section-title">Update APK Download Link (Google Drive / External)</h5>
+                <p class="section-desc">Paste your Google Drive share link or any external download URL below.</p>
                 <div class="d-flex gap-2">
-                    <input type="text" id="externalApkUrl" class="form-control" placeholder="Enter link or path" value="{{ $settings->apk_url ?? '' }}">
-                    <button class="btn-primary-custom" onclick="saveExternalApkUrl()">Save</button>
-                </div>
-            </div>
-            <div class="admin-card">
-                <h5 class="section-title">Upload APK File</h5>
-                <div class="apk-upload-box" id="apkUploadContainer" onclick="document.getElementById('apk_file_upload').click()">
-                    <i class="fas fa-cloud-upload-alt apk-upload-icon"></i>
-                    <div id="uploadStatusText">Tap to Select .apk File</div>
-                    <input type="file" id="apk_file_upload" class="d-none" accept=".apk" onchange="uploadApkFile(this)">
+                    <input type="text" id="externalApkUrl" class="form-control" placeholder="https://drive.google.com/..." value="{{ $settings->apk_url ?? '' }}">
+                    <button class="btn-primary-custom" onclick="saveExternalApkUrl()">Update Link</button>
                 </div>
             </div>
         </section>
@@ -951,40 +926,6 @@
             } catch (error) {
                 alert("An error occurred. Please check console.");
                 console.error(error);
-            }
-        }
-
-        async function uploadApkFile(input) {
-            if (!input.files[0]) return;
-
-            const statusText = document.getElementById('uploadStatusText');
-            const originalText = statusText.innerText;
-            statusText.innerText = "Uploading " + input.files[0].name + "... Please wait.";
-            statusText.style.color = "#007bff";
-
-            const fd = new FormData();
-            fd.append('apk_file', input.files[0]);
-
-            try {
-                const res = await fetch("{{ route('admin.apk.upload') }}", {
-                    method: 'POST',
-                    headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
-                    body: fd
-                });
-
-                const data = await res.json();
-                if (res.ok) {
-                    alert(data.message || "APK uploaded successfully!");
-                    location.reload();
-                } else {
-                    statusText.innerText = originalText;
-                    statusText.style.color = "";
-                    alert(data.message || "Failed to upload APK");
-                }
-            } catch (error) {
-                statusText.innerText = originalText;
-                statusText.style.color = "";
-                alert("An error occurred during upload.");
             }
         }
 

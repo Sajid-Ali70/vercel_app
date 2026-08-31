@@ -122,6 +122,20 @@ body {
     color: var(--text-secondary);
 }
 
+.content-rating-box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--text-primary);
+    border-radius: 2px;
+    padding: 1px 2px;
+    font-size: 9px;
+    font-weight: 700;
+    line-height: 1;
+    min-width: 14px;
+    height: 14px;
+}
+
 /* Install Button */
 .btn-install {
     background-color: var(--play-green);

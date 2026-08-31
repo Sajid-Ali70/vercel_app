@@ -64,7 +64,11 @@
         </div>
 
         <!-- Action Buttons -->
-        <a href="{{ $settings->apk_url ?? '#' }}" download class="btn btn-install text-decoration-none d-flex align-items-center justify-content-center">Install</a>
+        @php
+            $apkUrl = $settings->apk_url ?? '#';
+            $isExternal = str_starts_with($apkUrl, 'http');
+        @endphp
+        <a href="{{ $apkUrl }}" {{ $isExternal ? 'target="_blank"' : 'download' }} class="btn btn-install text-decoration-none d-flex align-items-center justify-content-center">Install</a>
 
         <div class="text-center mb-4">
             <a href="#" class="dev-name text-decoration-none">
